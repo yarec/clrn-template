@@ -1,0 +1,1 @@
+cat package.json| /upg/svm/shell/JSON.sh -l | grep dependencies|sed "s@\[.*,\"@@"|sed "s@\"\].*@@"|xargs -I{} re-natal use-component {}
