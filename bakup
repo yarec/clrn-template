@@ -1,1 +1,2 @@
-cp -r src/test6 /upg/clrn-template
+cp -r src/test7 /upg/clrn-template
+cp package.json /upg/clrn-template/
