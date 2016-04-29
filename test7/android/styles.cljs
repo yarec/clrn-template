@@ -1,4 +1,4 @@
-(ns test6.android.styles)
+(ns test7.android.styles)
 
 (def styles
   {:app       {:position "absolute"

@@ -1,9 +1,9 @@
-(ns test6.android.components.drawer
+(ns test7.android.components.drawer
   (:require
     [reagent.core :as r]
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
-    [test6.shared.ui :as ui]
-    [test6.android.ui :as android-ui]))
+    [test7.shared.ui :as ui]
+    [test7.android.ui :as android-ui]))
 
 (def logo-img
   (js/require "./images/cljs.png"))

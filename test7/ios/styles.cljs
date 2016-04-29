@@ -1,4 +1,4 @@
-(ns test6.ios.styles)
+(ns test7.ios.styles)
 
 (def styles
   {:app       {:position "absolute"
@@ -38,6 +38,8 @@
                                          :resizeMode "cover"}}
 
                :test {:view            {:padding 0
+                                        :padding-top 15
+                                        :height 500
                                          :flex    1}
                        :title           {:font-weight   "bold"
                                          :margin-bottom 4}
@@ -45,5 +47,25 @@
                                          :margin-bottom 20}
                        :card            {:height     105
                                          :flex       1
-                                         :resizeMode "cover"}                                  
-                       } }})
+                                         :resizeMode "cover"}
+
+                      :feed {:action-text {:padding 8
+                                           :color "#666666"
+                                           :font-size 16
+                                           :font-weight "bold"}
+                             :link-text {:color "#4078c0"
+                                         :font-size 15
+                                         :font-weight "normal"}
+                             :view-col {:flexDirection "column"
+                                        :justifyContent "center"
+                                        :padding 3
+                                        :backgroundColor "#F6F6F6"}
+                             :view-row {:flexDirection "row"
+                                        :padding-left 5
+                                        :justifyContent "flex-start"
+                                        }
+                             :create-at {:margin-left 10
+                                         :margin-top 2
+                                         :font-size 11
+                                         :color "#BFBFBF"}
+                             }}}})

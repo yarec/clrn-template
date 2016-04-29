@@ -1,4 +1,4 @@
-(ns test6.shared.ui
+(ns test7.shared.ui
   (:require [reagent.core :as r]))
 
 (set! js/React (js/require "react-native"))

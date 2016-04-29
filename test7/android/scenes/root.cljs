@@ -1,14 +1,14 @@
-(ns test6.android.scenes.root
+(ns test7.android.scenes.root
   (:require [reagent.core :as r]
             [clojure.string :refer [blank?]]
             [re-frame.core :refer [subscribe dispatch dispatch-sync]]
-            [test6.shared.ui :as ui]
-            [test6.shared.scenes.main :refer [main-scene]]
-            [test6.shared.scenes.about :refer [about-scene]]
-            [test6.shared.scenes.test :refer [test-scene]]
-            [test6.android.ui :as android-ui]
-            [test6.android.styles :as s]
-            [test6.android.components.drawer :refer [drawer-component]]))
+            [test7.shared.ui :as ui]
+            [test7.shared.scenes.main :refer [main-scene]]
+            [test7.shared.scenes.about :refer [about-scene]]
+            [test7.shared.scenes.test :refer [test-scene]]
+            [test7.android.ui :as android-ui]
+            [test7.android.styles :as s]
+            [test7.android.components.drawer :refer [drawer-component]]))
 
 (defn show-add-dialog []
   (android-ui/show-dialog {:title        "Add city"

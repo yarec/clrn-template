@@ -1,14 +1,14 @@
-(ns test6.ios.core
+(ns test7.ios.core
   (:require [clojure.string :refer [blank?]]
             [reagent.core :as r]
             [re-frame.core :refer [subscribe dispatch dispatch-sync]]
-            [test6.handlers]
-            [test6.subs]
-            [test6.db :as db]
-            [test6.shared.ui :as ui]
-            [test6.ios.ui :as ios-ui]
-            [test6.ios.styles :as s]
-            [test6.ios.scenes.root :refer [root-scene]]))
+            [test7.handlers]
+            [test7.subs]
+            [test7.db :as db]
+            [test7.shared.ui :as ui]
+            [test7.ios.ui :as ios-ui]
+            [test7.ios.styles :as s]
+            [test7.ios.scenes.root :refer [root-scene]]))
 
 (defn app-root []
   [root-scene]
@@ -28,4 +28,4 @@
 (defn init []
   (dispatch-sync [:initialize-schema])
   (dispatch [:load-from-db :city])
-  (.registerComponent ui/app-registry "test6" #(r/reactify-component app-root)))
+  (.registerComponent ui/app-registry "test7" #(r/reactify-component app-root)))
