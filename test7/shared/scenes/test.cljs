@@ -147,24 +147,67 @@
   )
 
 (defn get-events [page callback options]
-  (let [url "https://api.github.com/users/yarec/received_events"]
+  (let [url "https://api.github.com/users/yarec/received_events"
+        ;; url "http://interface.ihuipao.cn/race/nav/raceid/16"
+        ]
+    (print url)
     (GET url {:handler (fn [resp]
-                         ;;(print resp)
+                         (print resp)
                          (callback (clj->js resp))
                          )
               })
     )
   )
 
+(defn render-row1 [row]
+  (r/as-element [ui/view 
+                 [ui/text "hello"]
+                 ]
+                ))
+(defn test-get []
+  (let [url "https://api.github.com/users/yarec/received_events"
+        ;; url "http://interface.ihuipao.cn/race/nav/raceid/16"
+        ]
+    (print url)
+    (.then (.fetch js/window url) (fn [resp]
+                         (.log js/console (.json resp) )))
+    #_(ajax-request {:uri url
+                   :method :get
+                   :handler (fn [[ok resp]]
+                              (print ok)
+                              (print resp)
+                              )
+                   :format (json-request-format)
+                   :response-format {:read (fn [r]
+                                             (.log js/console r)
+                                             )
+                                     :description "raw"}
+                   }
+                  )
+    #_(GET url {:handler (fn [resp]
+                         (print 11)
+                         (print resp)
+                         )
+              }
+         )
+    )
+  )
 (defn listview []
-  [ui/gifted-list-view
-   {:row-view render-row
-    :on-fetch get-events
-    ;;(fn [page, callback, options] (js/setTimeout #(callback (clj->js @rows)) 1000) )
-    :first-load true
-    :enableEmptySections true
-    :with-section true
-    }
+  [ui/view
+   [ui/text {:on-press #(test-get)}
+    "test get"]
+   [ui/text {:on-press #(print "hhhh")}
+    "hello"]
+   [ui/gifted-list-view
+    {:row-view render-row
+     :on-fetch get-events
+
+     ;; :row-view render-row1
+     ;; :on-fetch (fn [page, callback, options] (js/setTimeout #(callback (clj->js @rows)) 1000) )
+
+     :first-load true
+     :enableEmptySections true
+     :with-section true}]
    ]
   )
 
