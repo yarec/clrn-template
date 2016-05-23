@@ -2,6 +2,7 @@
   (:require
     [re-frame.core :refer [subscribe dispatch dispatch-sync]]
     [reagent.core :as r]
+    [clojure.walk :refer [keywordize-keys]]
     [ajax.core :refer [GET POST ajax-request json-request-format json-response-format]]
     [test7.shared.ui :as ui]))
 
@@ -164,13 +165,57 @@
                  [ui/text "hello"]
                  ]
                 ))
+(defn test-login []
+  (let [url "http://ihuipao.cn/user/login"
+        params (js-obj "method" "POST"
+
+                       "redirect"
+                       "error"
+                       ;;"follow"
+                       ;;"manual"
+
+                       "body" "account=rentie@ihuipao.cn&password=123456"
+                       "headers" (js-obj "content-type" "application/x-www-form-urlencoded")
+                )
+                ]
+    (.then (.fetch js/window url params)
+           (fn [resp]
+             (let [data (keywordize-keys resp)
+                   headers (js->clj (.-headers resp) :keywordize-keys true)
+                   cookies (aget (.-map headers) "set-cookie")
+                   ]
+
+               (.log js/console headers)
+               (.log js/console cookies)
+               ;;(print (js->clj cookies :keywordize-keys true))
+               ;;(.log js/console resp)
+               ;;(print (keywordize-keys (js->clj cookies :keywordize-keys true)))
+               ;;(.log js/console (get dd "type"))
+               ;;(.log js/console resp)
+               ;;(print (.json resp))
+               ;;(.log js/console (get data "headers") )
+               )))
+           )
+    )
+
+(defn test-cookies []
+  (let [cks-mgr ui/cks-mgr]
+    (.getAll cks-mgr (fn [err, res]
+                       (print err)
+                       (print res)
+                       ))
+    )
+  )
 (defn test-get []
   (let [url "https://api.github.com/users/yarec/received_events"
-        ;; url "http://interface.ihuipao.cn/race/nav/raceid/16"
+        url "http://interface.ihuipao.cn/race/nav/raceid/16"
+        url "http://interface.ihuipao.cn/index/userinfo"
         ]
     (print url)
     (.then (.fetch js/window url) (fn [resp]
-                         (.log js/console (.json resp) )))
+                                    (.log js/console resp )
+                                    ;;(.log js/console (.json resp) )
+                                    ))
     #_(ajax-request {:uri url
                    :method :get
                    :handler (fn [[ok resp]]
@@ -196,6 +241,19 @@
   [ui/view
    [ui/text {:on-press #(test-get)}
     "test get"]
+   [ui/touchable-highlight {:style {:border-width 1 :border-color "#110"
+                                    :margin 10
+                                    :padding 10
+                                    :background-color "#98f"}
+                            :on-press #(test-cookies)}
+    [ui/text "show Cookies"]]
+   [ui/touchable-highlight {:style {:border-width 1 :border-color "#110"
+                                    :margin 10
+                                    :padding 10
+                                    :background-color "#98f"}
+                            :on-press #(test-login)}
+    [ui/text "test login"]]
+
    [ui/text {:on-press #(print "hhhh")}
     "hello"]
    [ui/gifted-list-view

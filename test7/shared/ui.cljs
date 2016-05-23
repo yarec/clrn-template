@@ -5,6 +5,7 @@
 (set! js/ScrollableTabView (js/require "react-native-scrollable-tab-view"))
 (set! js/GiftedListView (js/require "react-native-gifted-listview"))
 
+(set! cks-mgr (js/require "react-native-cookies"))
 ;;(set! js/Refresher (js/require "react-native-refresher"))
 
 (def app-registry
