@@ -36,3 +36,12 @@
 ;;(def refresh-list-view (r/adapt-react-class (.-RefresherListView js/Refresher)))
 ;;(def loading-bar-indicator (r/adapt-react-class (.-LoadingBarIndicator js/Refresher)))
 
+
+(defn hi-btn [name callback]
+    [ui/touchable-highlight {:style {:border-width 1 :border-color "#110"
+                                    :margin 10
+                                    :padding 10
+                                    :background-color "#98f"}
+                            :on-press callback}
+    [ui/text name]]
+    )
