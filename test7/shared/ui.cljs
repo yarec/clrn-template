@@ -38,10 +38,10 @@
 
 
 (defn hi-btn [name callback]
-    [ui/touchable-highlight {:style {:border-width 1 :border-color "#110"
+    [touchable-highlight {:style {:border-width 1 :border-color "#110"
                                     :margin 10
                                     :padding 10
                                     :background-color "#98f"}
                             :on-press callback}
-    [ui/text name]]
+    [text name]]
     )

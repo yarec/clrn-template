@@ -1,6 +1,7 @@
 (ns test7.shared.components.gitfeed
   (:require
     [reagent.core :as r]
+    [clojure.walk :refer [keywordize-keys]]
     [ajax.core :refer [GET POST ajax-request json-request-format json-response-format]]
     [test7.shared.ui :as ui]))
 
@@ -121,12 +122,6 @@
                      repo-name]]
                    ])))
 
-(defn render-row1 [row]
-  (r/as-element [ui/view
-                 [ui/text "hello"]
-                 ]
-                ))
-
 (defn test-login []
   (let [url "http://ihuipao.cn/user/login"
         params (js-obj "method" "POST"
@@ -204,33 +199,50 @@
 
 (defn listview [style]
   (reset! styl style)
-  [ui/view
+  #_[ui/view
    [ui/text {:on-press #(test-get)}
     "test get"]
-   [ui/touchable-highlight {:style {:border-width 1 :border-color "#110"
-                                    :margin 10
-                                    :padding 10
-                                    :background-color "#98f"}
-                            :on-press #(test-cookies)}
-    [ui/text "show Cookies"]]
-   [ui/touchable-highlight {:style {:border-width 1 :border-color "#110"
-                                    :margin 10
-                                    :padding 10
-                                    :background-color "#98f"}
-                            :on-press #(test-login)}
-    [ui/text "test login"]]
+    [ui/hi-btn "test-get" #(test-get)]
+    [ui/hi-btn "show Cookies" #(test-cookies)]
+    [ui/hi-btn "test login" #(test-login)]
 
-   [ui/text {:on-press #(print "hhhh")}
-    "hello"]
-   [ui/gifted-list-view
-    {:row-view render-row
-     :on-fetch get-events
-
-     ;; :row-view render-row1
-     ;; :on-fetch (fn [page, callback, options] (js/setTimeout #(callback (clj->js @rows)) 1000) )
-
-     :first-load true
-     :enableEmptySections true
-     :with-section true}]
+   [ui/text {:on-press #(print "hhhh")} "hello"]
    ]
+
+   [ui/view
+   [ui/gifted-list-view
+   {:row-view render-row
+       :on-fetch get-events
+       :first-load true
+       :enableEmptySections true
+       :with-section true}]
+       ]
   )
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn list-view-source [v]
+  (let [res #js[]]
+    (doseq [item v]
+      (.push res (r/atom item)))
+    (r/atom (js->clj res))))
+
+(def rows (list-view-source (clj->js (range 40))))
+
+(defn render-row1 [row]
+  (r/as-element [ui/view
+                 [ui/text "hello"]
+                 ]
+                ))
+
+(defn test-list-view []
+    [ui/gifted-list-view
+    {
+        :row-view render-row1
+        :on-fetch (fn [page, callback, options] (js/setTimeout #(callback (clj->js @rows)) 1000) )
+
+        :first-load true
+        :enableEmptySections true
+        :with-section true}]
+        )
