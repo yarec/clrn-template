@@ -199,7 +199,7 @@
 
 (defn listview [style]
   (reset! styl style)
-  #_[ui/view
+  [ui/view {:style {:flex 1}}
    [ui/text {:on-press #(test-get)}
     "test get"]
     [ui/hi-btn "test-get" #(test-get)]
@@ -207,9 +207,7 @@
     [ui/hi-btn "test login" #(test-login)]
 
    [ui/text {:on-press #(print "hhhh")} "hello"]
-   ]
 
-   [ui/view
    [ui/gifted-list-view
    {:row-view render-row
        :on-fetch get-events
