@@ -42,5 +42,16 @@
      [test/test-comp style]
      ]
     ]
+   [ui/view {:tab-label "map"}
+    [ui/text {:style (get style :author)} "somebody2" ]
+    ;; [test/test-comp style]
+    [ui/mmap-view
+     {:region {:latitude 37.78825
+               :longitude -122.4324
+               :latitudeDelta 0.0922
+               :longitudeDelta 0.0421}}
+
+     ]
+    ]
    ]
   )

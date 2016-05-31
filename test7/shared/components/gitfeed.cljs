@@ -171,50 +171,34 @@
         url "http://interface.ihuipao.cn/index/userinfo"
         ]
     (print url)
-    (.then (.fetch js/window url) (fn [resp]
-                                    (.log js/console resp )
-                                    ;;(.log js/console (.json resp) )
-                                    ))
-    #_(ajax-request {:uri url
-                     :method :get
-                     :handler (fn [[ok resp]]
-                                (print ok)
-                                (print resp)
-                                )
-                     :format (json-request-format)
-                     :response-format {:read (fn [r]
-                                               (.log js/console r)
-                                               )
-                                       :description "raw"}
-                     }
-                    )
-    #_(GET url {:handler (fn [resp]
-                           (print 11)
-                           (print resp)
-                           )
-                }
-        )
+    (-> js/window
+        (.fetch url)
+        (.then  (fn [resp]
+                  (.log js/console resp )
+                  (.log js/console (.-status resp) )
+                  (.log js/console (aget resp "_bodyText") )
+                  )))
     )
   )
 
 (defn listview [style]
   (reset! styl style)
   [ui/view {:style {:flex 1}}
-   [ui/text {:on-press #(test-get)}
-    "test get"]
-    [ui/hi-btn "test-get" #(test-get)]
-    [ui/hi-btn "show Cookies" #(test-cookies)]
-    [ui/hi-btn "test login" #(test-login)]
+   [ui/text {:on-press #(test-get)} "test get"]
+   [ui/hi-btn "test-get" #(test-get)]
+   [ui/hi-btn "show Cookies" #(test-cookies)]
+   [ui/hi-btn "test login" #(test-login)]
+   [ui/hi-btn "show user" #(show-user)]
 
    [ui/text {:on-press #(print "hhhh")} "hello"]
 
    [ui/gifted-list-view
-   {:row-view render-row
-       :on-fetch get-events
-       :first-load true
-       :enableEmptySections true
-       :with-section true}]
-       ]
+    {:row-view render-row
+     :on-fetch get-events
+     :first-load true
+     :enableEmptySections true
+     :with-section true}]
+   ]
   )
 
 

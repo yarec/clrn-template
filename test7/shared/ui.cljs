@@ -5,6 +5,8 @@
 (set! js/ScrollableTabView (js/require "react-native-scrollable-tab-view"))
 (set! js/GiftedListView (js/require "react-native-gifted-listview"))
 
+(set! js/MapView (js/require "react-native-gifted-listview"))
+
 (set! cks-mgr (js/require "react-native-cookies"))
 ;;(set! js/Refresher (js/require "react-native-refresher"))
 
@@ -14,6 +16,7 @@
 ;; Basic views
 
 (def view         (r/adapt-react-class (.-View js/React)))
+(def map-view     (r/adapt-react-class (.-MapView js/React)))
 (def scroll       (r/adapt-react-class (.-ScrollView js/React)))
 (def image        (r/adapt-react-class (.-Image js/React)))
 (def text         (r/adapt-react-class (.-Text js/React)))
@@ -36,6 +39,8 @@
 ;;(def refresh-list-view (r/adapt-react-class (.-RefresherListView js/Refresher)))
 ;;(def loading-bar-indicator (r/adapt-react-class (.-LoadingBarIndicator js/Refresher)))
 
+
+(def mmap-view (r/adapt-react-class js/MapView))
 
 (defn hi-btn [name callback]
     [touchable-highlight {:style {:border-width 1 :border-color "#110"
