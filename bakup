@@ -1,2 +1,7 @@
-cp -r src/test7 /upg/clrn-template
+cp -rv src/test*/* /upg/clrn-template/src
+
+#cd src/test*/
+#ls -1 | xargs -I{} cp -rv {} /upg/clrn-template/src
+#cd -
+
 cp package.json /upg/clrn-template/

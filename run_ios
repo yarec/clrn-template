@@ -1,4 +1,4 @@
-re-natal use-ios-device simulator
+#re-natal use-ios-device simulator
 re-natal xcode
 re-natal use-figwheel
 lein figwheel ios
