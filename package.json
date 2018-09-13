@@ -6,7 +6,7 @@
     "start": "node_modules/react-native/packager/packager.sh --nonPersistent"
   },
   "dependencies": {
-    "react": "15.2.1",
-    "react-native": "0.30.0"
+    "react": "16.5.0",
+    "react-native": "0.57.0"
   }
 }
